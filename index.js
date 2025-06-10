@@ -8,13 +8,12 @@ exports.example = () => 'hello world';
 // Problem 1 - stripPrivateProperties
 exports.stripPrivateProperties = (keywords = [], source = []) => {
   return source.map((item) => {
-    const result = {};
-    Object.keys(item).forEach((it) => {
-      if (!keywords.includes(it)) {
-        result[it] = item[it];
+    return Object.keys(item).reduce((pre, cur) => {
+      if (!keywords.includes(cur)) {
+        pre[cur] = item[cur];
       }
-    });
-    return result;
+      return pre;
+    }, {});
   });
 };
 
